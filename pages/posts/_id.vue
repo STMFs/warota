@@ -1,15 +1,15 @@
 <template>
   <div>
-    <div>{{ id }}</div>
+    <div>ページのid: {{ id }}</div>
     <div>お題: {{ name }}</div>
     <!-- <div>ユーザー名: {{ userName }}</div> -->
     <!-- ↑ 表示してみて！ -->
+
+    <!-- お題の変更 -->
     <form @submit="$event.preventDefault(), changeName()">
       <input v-model="value" />
-      <!-- <input /> -->
       <button type="submit">変更</button>
     </form>
-    <!-- <input v-model="value" @submit="changeName($event)" /> -->
   </div>
 </template>
 
@@ -60,8 +60,8 @@ export default {
         .doc("id")
         .set({ content: this.value }) // .$data は省略できる
         .then(() => {
-          this.name = this.value;
-          this.value = "";
+          this.name = this.value; // input要素の値を代入
+          this.value = ""; // input要素の値を空白に
         });
     },
   },

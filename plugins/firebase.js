@@ -21,12 +21,3 @@ if (!firebase.apps.length) {
 }
 
 export default firebase
-
-// export default (context, inject) => {
-//   const $firebase = {
-//     app: firebase.app,
-//     auth: firebase.auth,
-//     firestore: firebase.firestore,
-//   }
-//   inject('firebase',$firebase)
-// }
