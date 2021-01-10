@@ -58,7 +58,7 @@ export default {
         .firestore()
         .collection("theme")
         .doc("id")
-        .set({ content: this.value }) // .$data は省略できる
+        .set({ content: this.value }, { merge: true }) // .$data は省略できる
         .then(() => {
           this.name = this.value; // input要素の値を代入
           this.value = ""; // input要素の値を空白に
