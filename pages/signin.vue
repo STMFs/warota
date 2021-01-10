@@ -19,6 +19,7 @@ export default {
     login() {
       console.log('login')
       const provider = new firebase.auth.GoogleAuthProvider()
+      //Fix: サインイン時googleログイン画面にリダイレクトのほうが良さそう？(リダイレクトだとログインに失敗してた)
       firebase.auth().signInWithPopup(provider).then(function(result) {
         var token = result.credential.accessToken
         var user = result.user
