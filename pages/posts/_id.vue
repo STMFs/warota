@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>ページのid: {{ id }}</div>
-    <div>お題: {{ name }}</div>
+    <div>コメント: {{ name }}</div>
     <!-- <div>ユーザー名: {{ userName }}</div> -->
     <!-- ↑ 表示してみて！ -->
 
@@ -20,14 +20,14 @@ export default {
   data() {
     const value = "";
     return {
-      value,
+      value
     };
   },
   computed: {
     id() {
       const id = this.$route.params.id;
       return id;
-    },
+    }
   },
   async asyncData() {
     // asyncDataという名前はあまり気にしないでください。
@@ -36,7 +36,7 @@ export default {
       .collection("theme")
       .doc("id") // themeの中の'id'というキー（ドキュメント）を持ったデータを
       .get() // 読み取り （他には .set() .update() などがある）
-      .then((doc) => {
+      .then(doc => {
         // docという引数には直前までの処理結果が入っている
         // then は直前までの処理が成功したら実行される
         return doc.data(); // データ形式を変換してるイメージ
@@ -45,7 +45,7 @@ export default {
 
     const name = theme.content;
     return {
-      name, // ここでreturnした変数は上の<template>の中で使える
+      name // ここでreturnした変数は上の<template>の中で使える
     };
   },
 
@@ -63,8 +63,8 @@ export default {
           this.name = this.value; // input要素の値を代入
           this.value = ""; // input要素の値を空白に
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
