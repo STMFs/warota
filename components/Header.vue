@@ -3,6 +3,7 @@
         <header>
             <h1>worota</h1>
             <div class="login_button" @click="login()">ログイン</div>
+            <div class="post_button" @click="route_post()">お題投稿</div>
         </header>
     </div>
 </template>
@@ -26,6 +27,9 @@ export default {
         //var credential = error.credential[
         console.log('login error:'+ errorMessage)
       })
+    },
+    route_post() {
+        this.$router.push("/post")
     }
   }
 }
@@ -33,6 +37,14 @@ export default {
 
 <style>
 .login_button{
+    width: 80px;
+    height: 30px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    opacity: 1;
+}
+
+.route_post{
     width: 80px;
     height: 30px;
     border: 1px solid #000;
