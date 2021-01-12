@@ -1,14 +1,9 @@
 <template>
-    <div class="container">
     <div>
-    <Logo />
-    <h1 class="title">
-        Ogiri
-    </h1>
-    <button @click="login()">
-      googleアカウントでログイン
-    </button>
-    </div>
+        <header>
+            <h1>worota</h1>
+            <div class="login_button" @click="login()">ログイン</div>
+        </header>
     </div>
 </template>
 
@@ -37,39 +32,11 @@ export default {
 </script>
 
 <style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+.login_button{
+    width: 80px;
+    height: 30px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    opacity: 1;
 }
-
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
 </style>
