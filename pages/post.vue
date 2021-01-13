@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="psubmit">
     <h1>お題投稿</h1>
     <form @submit="$event.preventDefault(), themePost()">
       <textarea maxlength='50' placeholder='50文字以内' v-model="value" required />
-      <button type="submit">投稿</button>
+      <button class="submit" type="submit">投稿</button>
     </form>
   </div>
 </template>
@@ -39,9 +39,9 @@ export default {
 </script>
 
 <style>
-  div {
-    width: 375px;
-    height:300px;
+  .psubmit {
+    width: 100vw;
+    height:82vw;
     background: white;
     text-align:left;
     margin-left: auto;
@@ -51,48 +51,50 @@ export default {
     -webkit-text-size-adjust: 100%;
     margin-right: auto;
     margin-left : auto;
-    width: 700px;
     background: #F5F5F5 0% 0% no-repeat padding-box;
   
   }
   h1 {
-    width:140px;
-    height:45px;
-    letter-spacing:0px;
-    margin: 22px 0px 22px 40px;
-    padding-top: 22px;
-    font: normal normal bold 35px/56px Yu Gothic;
+    width:50vw;
+    height:5.1vh;
+    margin: 5.8vw 0 5.8vw 5.3vw;
+    padding-top: 5.8vw;
+    /* font: normal normal bold 35px/56px Yu Gothic; */
+    font: normal normal bold 4.0vh/6.3vh Yu Gothic;
   }
   form {
-    width:280px;
+    width:87.5vw;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
   }
   textarea {
-    top: 160px;
-    left: 48px;
-    width: 280px;
-    height: 120px;
+    top: 18.1vh;
+    left: 12.8vw;
+    width: 87.5vw;
+    height: 32.8vw;
     border: 1px solid #000;
     border-radius: 5px;
     margin: 30px 0px 30px 0px;
   }
   ::placeholder {
-    font: normal normal bold 15px/24px Yu Gothic;
+    /* 15px 24px */
+    /* font: normal normal bold 1.7vh/2.7vh Yu Gothic; */
+    font: normal normal bold 4vw/6.4vw Yu Gothic;
     color: #a5a5a5;
-    padding-left:10px;
+    padding-left:2.6vw;
   }
- button {
-   font: normal normal bold 15px/24px Yu Gothic;
+ .submit {
+   /* font: normal normal bold 1.7vh/2.7vh Yu Gothic; */
+    font: normal normal bold 4vw/6.4vw Yu Gothic;
    color: #1492E6;
-   font-size:15px;
+   /* font-size:15px; */
    background: white 0% 0% no-repeat padding-box;
    border: 1px solid #000;
    border-radius: 4px;
    text-align: center;
-   width:80px;
-   height:30px;
+   width:21.3vw;
+   height:8vw;
 }
 
 </style>
