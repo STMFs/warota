@@ -40,7 +40,7 @@ export default {
 <style>
 header {
   width: 100vw;
-  height:56px;
+  height:6vh;
   background: white 0% 0% no-repeat padding-box;
   display: table-cell;
   vertical-align:middle;
@@ -48,6 +48,7 @@ header {
 .buttons{
   display: inline-block;
   float: right;
+  margin-right: 5vw;
 }
 .hbutton {
     width: 80px;
