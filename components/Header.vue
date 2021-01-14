@@ -1,9 +1,11 @@
 <template>
     <div>
         <header>
-            <h1>worota</h1>
-            <div class="login_button" @click="Login()">ログイン</div>
-            <div class="post_button" @click="Route_post()">お題投稿</div>
+            <div class="title">worota</div>
+            <div class="buttons">
+              <button class="hbutton" @click="login()">ログイン</button>
+              <button class="hbutton" @click="route_post()">お題投稿</button>
+            </div>
         </header>
     </div>
 </template>
@@ -56,19 +58,33 @@ export default {
 </script>
 
 <style>
-.login_button{
+header {
+  width: 100vw;
+  height:6vh;
+  background: white 0% 0% no-repeat padding-box;
+  display: table-cell;
+  vertical-align:middle;
+}
+.buttons{
+  display: inline-block;
+  float: right;
+  margin-right: 5vw;
+}
+.hbutton {
     width: 80px;
     height: 30px;
     border: 1px solid #000;
     border-radius: 4px;
-    opacity: 1;
+    text-align:center;
+    font: normal normal bold 15px/24px Yu Gothic;
+    display: inline-block;
+    background: white 0% 0% no-repeat padding-box;
+    margin-right:10px;
+}
+.title {
+  font: normal normal bold 20px/30px Meiryo;
+  display: inline-block;
+  margin-left:10px;
 }
 
-.route_post{
-    width: 80px;
-    height: 30px;
-    border: 1px solid #000;
-    border-radius: 4px;
-    opacity: 1;
-}
 </style>
