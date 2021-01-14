@@ -27,29 +27,16 @@ export default {
     const themes = await firebase
       .firestore() // サービスを選択（他には .auth() など）
       .collection("theme")
-      // .doc(context.route.params.id) // themeの中のキー（ドキュメント）を持ったデータを
       .get() // 読み取り （他には .set() .update() などがある）
       .then(collection => {
-        console.log(collection.docs);
-        console.log(Array.isArray(collection.docs)); // objectの配列
+        // console.log(Array.isArray(collection.docs)); // objectの配列
         return collection.docs.map( doc => {
-          //   themes2.push(doc.data());
-          // console.log(doc.data());
           return doc.data();
         });
-
-        // return なにか
       });
-    console.log("themes", themes);
-    // console.log("themes", themes2);
+    // console.log("themes", themes);
 
-    // const contents = theme.content;
-    // const comments = theme.comments;
-
-    // console.log(comments);
     return {
-      //   contents, // ここでreturnした変数は上の<template>の中で使える
-      //   comments,
       themes
     };
   },
