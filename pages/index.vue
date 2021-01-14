@@ -1,34 +1,59 @@
 <template>
-  <div class="container">
+  <div>
     <div>
-      <Logo />
-      <h1 class="title">
-        Ogiri
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+      <li v-for="theme in themes" :key="theme.content">
+        {{ theme.content }}
+        <div>お題への回答を見る</div>
+      </li>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+import firebase from "@/plugins/firebase.js";
+
+export default {
+  data() {
+    const value = "";
+    const count = 0;
+    return {
+      value
+    };
+  },
+
+  async asyncData(context) {
+    // console.log(context.route.params);
+    // asyncDataという名前はあまり気にしないでください。
+    const themes = await firebase
+      .firestore() // サービスを選択（他には .auth() など）
+      .collection("theme")
+      // .doc(context.route.params.id) // themeの中のキー（ドキュメント）を持ったデータを
+      .get() // 読み取り （他には .set() .update() などがある）
+      .then(collection => {
+        console.log(collection.docs);
+        console.log(Array.isArray(collection.docs)); // objectの配列
+        return collection.docs.map( doc => {
+          //   themes2.push(doc.data());
+          // console.log(doc.data());
+          return doc.data();
+        });
+
+        // return なにか
+      });
+    console.log("themes", themes);
+    // console.log("themes", themes2);
+
+    // const contents = theme.content;
+    // const comments = theme.comments;
+
+    // console.log(comments);
+    return {
+      //   contents, // ここでreturnした変数は上の<template>の中で使える
+      //   comments,
+      themes
+    };
+  },
+};
 </script>
 
 <style>
@@ -42,16 +67,8 @@ export default {}
 }
 
 .title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;
