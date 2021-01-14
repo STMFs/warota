@@ -3,6 +3,7 @@
     <div>
       <li v-for="theme in themes" :key="theme.content">
         {{ theme.content }}
+        <!-- TODO ページ遷移に対応させる -->
         <div>お題への回答を見る</div>
       </li>
     </div>
@@ -44,6 +45,7 @@ export default {
 </script>
 
 <style>
+/* TODO CSS 書く */
 .container {
   margin: 0 auto;
   min-height: 100vh;
