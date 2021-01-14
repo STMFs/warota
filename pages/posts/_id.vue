@@ -1,15 +1,20 @@
 <template>
   <div>
-    <div>ページのid: {{ id }}</div>
-    <div>コメント: {{ name }}</div>
-    <!-- <div>ユーザー名: {{ userName }}</div> -->
-    <!-- ↑ 表示してみて！ -->
-
-    <!-- お題の変更 -->
-    <form @submit="$event.preventDefault(), changeName()">
+    <!-- お題の内容 -->
+    <h1>{{ contents }}</h1>
+    <!-- 回答一覧  Good回数 -->
+    <div>
+      <li v-for="(comment, index) in comments" :key="comment.content">
+        {{ comment.content }}
+        <button v-on:click="counter(index)">{{ comment.good_count }}</button>
+      </li>
+    </div>
+    <!-- お題の回答 -->
+    <form @submit="$event.preventDefault(), postComment()">
       <input v-model="value" />
-      <button type="submit">変更</button>
+      <button type="submit">回答</button>
     </form>
+    <!-- <div>{{ id }}</div> -->
   </div>
 </template>
 
@@ -19,22 +24,19 @@ import firebase from "@/plugins/firebase.js";
 export default {
   data() {
     const value = "";
+    const count = 0;
     return {
       value
     };
   },
-  computed: {
-    id() {
-      const id = this.$route.params.id;
-      return id;
-    }
-  },
-  async asyncData() {
+
+  async asyncData(context) {
+    console.log(context.route);
     // asyncDataという名前はあまり気にしないでください。
     const theme = await firebase
       .firestore() // サービスを選択（他には .auth() など）
       .collection("theme")
-      .doc("id") // themeの中の'id'というキー（ドキュメント）を持ったデータを
+      .doc(context.route.params.id) // themeの中のキー（ドキュメント）を持ったデータを
       .get() // 読み取り （他には .set() .update() などがある）
       .then(doc => {
         // docという引数には直前までの処理結果が入っている
@@ -43,60 +45,47 @@ export default {
       });
     console.log("theme", theme);
 
-    const name = theme.content;
+    const contents = theme.content;
+    const comments = theme.comments;
+
+    console.log(comments);
     return {
-      name // ここでreturnした変数は上の<template>の中で使える
+      contents, // ここでreturnした変数は上の<template>の中で使える
+      comments,
+      theme
     };
   },
-
   methods: {
-    // お題を変更
-    changeName() {
-      console.log(this.$data.value);
+    // いいね数を増やす
+    counter(index) {
+      console.log(index);
 
+      const newOata = { ...this.theme };
+      newOata.comments[index].good_count += 1;
       firebase
         .firestore()
         .collection("theme")
-        .doc("id")
-        .set({ content: this.value }, { merge: true }) // .$data は省略できる
+        .doc(this.$route.params.id)
+        .set(newOata, { merge: true }); // .$data は省略できる
+    },
+
+    postComment() {
+      const commentData = {
+        content: this.value,
+        good_count: 0
+      };
+      this.comments.push(commentData); // pushの引数を配列に追加
+      firebase
+        .firestore()
+        .collection("theme")
+        .doc(this.$route.params.id)
+        .update({
+          comments: firebase.firestore.FieldValue.arrayUnion(commentData)
+        })
         .then(() => {
-          this.name = this.value; // input要素の値を代入
           this.value = ""; // input要素の値を空白に
         });
     }
   }
 };
 </script>
-
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>
