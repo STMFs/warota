@@ -3,8 +3,8 @@
         <header>
             <div class="title">worota</div>
             <div class="buttons">
-              <button class="hbutton" @click="login()">ログイン</button>
-              <button class="hbutton" @click="route_post()">お題投稿</button>
+              <button class="hbutton" id="login_button" @click="Login()">ログイン</button>
+              <button class="hbutton" @click="Route_post()">お題投稿</button>
             </div>
         </header>
     </div>
@@ -13,6 +13,14 @@
 <script>
 import firebase from "@/plugins/firebase.js"
 export default {
+  mounted() {
+    const login_button = document.getElementById('login_button')
+    firebase.auth().onAuthStateChanged(user => {
+      if(user){ //ログイン時ログインボタンを非表示
+        login_button.style.display = 'none';
+      }
+    })
+  },
   methods: {
     Login() {
       firebase.auth().onAuthStateChanged(function(user){
@@ -42,17 +50,10 @@ export default {
           //this.$router.push("/post")
           console.log(user)
         }else{
-          console.log('ログインしてください')
+          alert('googleアカウントでログインしてください')
         }
       })
     },
-/*
-    IsUser() {
-      firebase.auth().onAuthStateChanged(function(user){
-
-      })
-    }
-*/
   }
 }
 </script>
