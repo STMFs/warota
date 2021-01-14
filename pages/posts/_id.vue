@@ -67,9 +67,6 @@ export default {
         .collection("theme")
         .doc(this.$route.params.id)
         .set(newOata, { merge: true }); // .$data は省略できる
-      // .then(() => {
-      //   this.comments[index].good_count = this.comments[index].good_count + 1;
-      // });
     },
 
     postComment() {
