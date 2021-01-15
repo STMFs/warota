@@ -47,7 +47,7 @@ export default {
     Route_post() {
       firebase.auth().onAuthStateChanged(function(user){
         if(user){
-          //this.$router.push("/post")
+          this.$router.push("/post")
           console.log(user)
         }else{
           alert('googleアカウントでログインしてください')
