@@ -1,10 +1,9 @@
 <template>
-  <div>
+  <div class="theme_page">
     <div>
       <li v-for="theme in themes" :key="theme.content">
         {{ theme.content }}
         <div>
-          <!-- <nuxt-link to="/posts?theme.uid }"> お題への回答を見る</nuxt-link> -->
           <nuxt-link :to="`/posts/` + `${theme.uid}`">
             お題への回答を見る</nuxt-link
           >
@@ -48,6 +47,16 @@ export default {
 
 <style>
 /* TODO CSS 書く */
+
+li {
+  list-style: none;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
 .container {
   margin: 0 auto;
   min-height: 100vh;
@@ -77,5 +86,32 @@ export default {
 
 .links {
   padding-top: 15px;
+}
+
+.theme {
+  display: flex;
+  height: 12.5vh;
+  width: 100%;
+  background: #ffd857 0% 0%;
+  font: normal normal bold 4.8vw/7.7vw Yu Gothic;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.theme_page {
+  margin-top: 3vh;
+}
+
+.answer {
+  display: flex;
+  width: 100%;
+  height: 6vh;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font: normal normal bold 1.7vh/2.7vh Yu Gothic;
 }
 </style>

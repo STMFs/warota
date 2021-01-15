@@ -1,14 +1,14 @@
 <template>
   <div>
-    <header>
-      <div class="title">worota</div>
-      <div class="buttons">
-        <button class="hbutton" id="login_button" @click="Login()">
+    <header :class="$style.header">
+      <nuxt-link to="/" :class="$style.title">worota</nuxt-link>
+      <div :class="$style.buttons">
+        <button :class="$style.hbutton" id="login_button" @click="login()">
           ログイン
         </button>
-        <nuxt-link to="/post">
-          <button class="hbutton" @click="Route_post()">お題投稿</button>
-        </nuxt-link>
+        <button :class="$style.hbutton" @click="$router.push('/post')">
+          お題投稿
+        </button>
       </div>
     </header>
   </div>
@@ -27,7 +27,7 @@ export default {
     });
   },
   methods: {
-    Login() {
+    login() {
       firebase.auth().onAuthStateChanged(function(user) {
         console.log(user);
         if (!user) {
@@ -68,8 +68,8 @@ export default {
 };
 </script>
 
-<style>
-header {
+<style module>
+.header {
   width: 100vw;
   height: 6vh;
   background: white 0% 0% no-repeat padding-box;
