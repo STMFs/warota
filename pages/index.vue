@@ -91,9 +91,10 @@ a {
 
 .theme {
   display: flex;
-  height: 100px;
+  height: 12.5vh;
   width: 100%;
   background:#FFD857 0% 0%;
+  font: normal normal bold 4.8vw/7.7vw Yu Gothic;
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -107,10 +108,11 @@ a {
 .answer {
   display: flex;
   width: 100%;
-  height: 50px;
+  height: 6vh;
   text-align: center;
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  font: normal normal bold 1.7vh/2.7vh Yu Gothic;
 }
 </style>
