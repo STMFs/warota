@@ -14,7 +14,6 @@
       <input v-model="value" />
       <button type="submit">回答</button>
     </form>
-    <!-- <div>{{ id }}</div> -->
   </div>
 </template>
 
@@ -24,7 +23,7 @@ import firebase from "@/plugins/firebase.js";
 export default {
   data() {
     const value = "";
-    const count = 0;
+    // const count = 0;
     return {
       value
     };

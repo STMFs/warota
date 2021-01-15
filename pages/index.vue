@@ -42,11 +42,6 @@ export default {
     return {
       themes
     };
-  },
-  methods: {
-    pageTrans() {
-      this.$router.push("/pages/{{theme.uid}}");
-    }
   }
 };
 </script>

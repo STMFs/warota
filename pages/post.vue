@@ -23,7 +23,6 @@ export default {
     const value = "";
     return {
       value
-      // user
     };
   },
   methods: {
