@@ -13,26 +13,47 @@
 <script>
 import firebase from "@/plugins/firebase.js"
 export default {
+  mounted() {
+    const login_button = document.getElementById('login_button')
+    firebase.auth().onAuthStateChanged(user => {
+      if(user){ //ログイン時ログインボタンを非表示
+        login_button.style.display = 'none';
+      }
+    })
+  },
   methods: {
-    login() {
-      console.log('login')
-      const provider = new firebase.auth.GoogleAuthProvider()
-      //Fix: サインイン時googleログイン画面にリダイレクトのほうが良さそう？(リダイレクトだとログインに失敗してた)
-      firebase.auth().signInWithPopup(provider).then(function(result) {
-        var token = result.credential.accessToken
-        var user = result.user
-        console.log('success:'+ user)
-      }).catch(function(error) {
-        var errorCode = error.code
-        var errorMessage = error.message
-        //var email = error.email
-        //var credential = error.credential[
-        console.log('login error:'+ errorMessage)
+    Login() {
+      firebase.auth().onAuthStateChanged(function(user){
+        console.log(user);
+        if(!user){  //未ログイン時
+          console.log('Not logined')
+          const provider = new firebase.auth.GoogleAuthProvider()
+          //Fix: サインイン時googleログイン画面にリダイレクトのほうが良さそう？(リダイレクトだとログインに失敗してた)
+          firebase.auth().signInWithPopup(provider).then(function(result) {
+            var token = result.credential.accessToken
+            var user = result.user
+            console.log('success:'+ user)
+          }).catch(function(error) {
+            var errorCode = error.code
+            var errorMessage = error.message
+            //var email = error.email
+            //var credential = error.credential[
+            console.log('login error:'+ errorMessage)
+          })
+        }
       })
     },
-    route_post() {
-        this.$router.push("/post")
-    }
+
+    Route_post() {
+      firebase.auth().onAuthStateChanged(function(user){
+        if(user){
+          //this.$router.push("/post")
+          console.log(user)
+        }else{
+          alert('googleアカウントでログインしてください')
+        }
+      })
+    },
   }
 }
 </script>
