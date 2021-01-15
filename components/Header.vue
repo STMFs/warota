@@ -1,10 +1,10 @@
 <template>
     <div>
-        <header>
-            <div class="title">worota</div>
-            <div class="buttons">
-              <button class="hbutton" id="login_button" @click="Login()">ログイン</button>
-              <button class="hbutton" @click="Route_post()">お題投稿</button>
+        <header :class="$style.header">
+            <div :class="$style.title">worota</div>
+            <div :class="$style.buttons">
+              <button :class="$style.hbutton" @click="login()">ログイン</button>
+              <button :class="$style.hbutton" @click="route_post()">お題投稿</button>
             </div>
         </header>
     </div>
@@ -22,7 +22,7 @@ export default {
     })
   },
   methods: {
-    Login() {
+    login() {
       firebase.auth().onAuthStateChanged(function(user){
         console.log(user);
         if(!user){  //未ログイン時
@@ -44,7 +44,7 @@ export default {
       })
     },
 
-    Route_post() {
+    route_post() {
       firebase.auth().onAuthStateChanged(function(user){
         if(user){
           this.$router.push("/post")
@@ -58,8 +58,8 @@ export default {
 }
 </script>
 
-<style>
-header {
+<style module>
+.header {
   width: 100vw;
   height:6vh;
   background: white 0% 0% no-repeat padding-box;
