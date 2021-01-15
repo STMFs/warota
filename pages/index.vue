@@ -4,8 +4,8 @@
       <li v-for="theme in themes" :key="theme.content">
         <div class="theme"> {{ theme.content }} </div>
         <!-- TODO ページ遷移に対応させる -->
-        <div　class="answer">
-          <a href="#">お題への回答を見る</a>
+        <div class="answer">
+          <nuxt-link to="/posts/">お題への回答を見る</nuxt-link>
         </div>
       </li>
     </div>
