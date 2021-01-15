@@ -1,37 +1,58 @@
 <template>
-  <div class="container">
+  <div>
     <div>
-      <Logo />
-      <h1 class="title">
-        Ogiri
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+      <li v-for="theme in themes" :key="theme.content">
+        {{ theme.content }}
+        <div>
+          <!-- <nuxt-link to="/posts?theme.uid }"> お題への回答を見る</nuxt-link> -->
+          <nuxt-link :to="`/posts/` + `${theme.uid}`">
+            お題への回答を見る</nuxt-link
+          >
+        </div>
+      </li>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+import firebase from "@/plugins/firebase.js";
+
+export default {
+  data() {
+    const value = "";
+
+    return {
+      value
+    };
+  },
+
+  async asyncData(context) {
+    // console.log(context.route.params);
+    // asyncDataという名前はあまり気にしないでください。
+    const themes = await firebase
+      .firestore() // サービスを選択（他には .auth() など）
+      .collection("theme")
+      .get() // 読み取り （他には .set() .update() などがある）
+      .then(collection => {
+        // console.log(Array.isArray(collection.docs)); // objectの配列
+        return collection.docs.map(doc => {
+          return doc.data();
+        });
+      });
+    return {
+      themes
+    };
+  },
+  methods: {
+    pageTrans() {
+      this.$router.push("/pages/{{theme.uid}}");
+    }
+  }
+};
 </script>
 
 <style>
+/* TODO CSS 書く */
 .container {
   margin: 0 auto;
   min-height: 100vh;
@@ -42,16 +63,8 @@ export default {}
 }
 
 .title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;
