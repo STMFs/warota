@@ -3,8 +3,12 @@
     <div>
       <li v-for="theme in themes" :key="theme.content">
         {{ theme.content }}
-        <!-- TODO ページ遷移に対応させる -->
-        <div>お題への回答を見る</div>
+        <div>
+          <!-- <nuxt-link to="/posts?theme.uid }"> お題への回答を見る</nuxt-link> -->
+          <nuxt-link :to="`/posts/` + `${theme.uid}`">
+            お題への回答を見る</nuxt-link
+          >
+        </div>
       </li>
     </div>
   </div>
@@ -16,7 +20,7 @@ import firebase from "@/plugins/firebase.js";
 export default {
   data() {
     const value = "";
-    const count = 0;
+
     return {
       value
     };
@@ -31,16 +35,19 @@ export default {
       .get() // 読み取り （他には .set() .update() などがある）
       .then(collection => {
         // console.log(Array.isArray(collection.docs)); // objectの配列
-        return collection.docs.map( doc => {
+        return collection.docs.map(doc => {
           return doc.data();
         });
       });
-    // console.log("themes", themes);
-
     return {
       themes
     };
   },
+  methods: {
+    pageTrans() {
+      this.$router.push("/pages/{{theme.uid}}");
+    }
+  }
 };
 </script>
 
