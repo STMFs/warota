@@ -22,7 +22,7 @@ export default {
     })
   },
   methods: {
-    Login() {
+    login() {
       firebase.auth().onAuthStateChanged(function(user){
         console.log(user);
         if(!user){  //未ログイン時
@@ -44,7 +44,7 @@ export default {
       })
     },
 
-    Route_post() {
+    route_post() {
       firebase.auth().onAuthStateChanged(function(user){
         if(user){
           //this.$router.push("/post")
