@@ -1,10 +1,12 @@
 <template>
-  <div>
+  <div class="theme_page">
     <div>
       <li v-for="theme in themes" :key="theme.content">
-        {{ theme.content }}
+        <div class="theme"> {{ theme.content }} </div>
         <!-- TODO ページ遷移に対応させる -->
-        <div>お題への回答を見る</div>
+        <div class="answer">
+          <nuxt-link to="/posts/">お題への回答を見る</nuxt-link>
+        </div>
       </li>
     </div>
   </div>
@@ -46,6 +48,16 @@ export default {
 
 <style>
 /* TODO CSS 書く */
+
+li {
+  list-style: none;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
 .container {
   margin: 0 auto;
   min-height: 100vh;
@@ -75,5 +87,30 @@ export default {
 
 .links {
   padding-top: 15px;
+}
+
+.theme {
+  display: flex;
+  height: 100px;
+  width: 100%;
+  background:#FFD857 0% 0%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.theme_page{
+  margin-top: 3vh;
+}
+
+.answer {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
 }
 </style>

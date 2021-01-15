@@ -1,10 +1,10 @@
 <template>
     <div>
         <header :class="$style.header">
-            <div :class="$style.title">worota</div>
+            <nuxt-link to="/" :class="$style.title">worota</nuxt-link>
             <div :class="$style.buttons">
-              <button :class="$style.hbutton" @click="login()">ログイン</button>
-              <button :class="$style.hbutton" @click="route_post()">お題投稿</button>
+              <button :class="$style.hbutton" id="login_button" @click="login()">ログイン</button>
+              <button :class="$style.hbutton" @click="$router.push('/post')">お題投稿</button>
             </div>
         </header>
     </div>
@@ -40,17 +40,6 @@ export default {
             //var credential = error.credential[
             console.log('login error:'+ errorMessage)
           })
-        }
-      })
-    },
-
-    route_post() {
-      firebase.auth().onAuthStateChanged(function(user){
-        if(user){
-          //this.$router.push("/post")
-          console.log(user)
-        }else{
-          alert('googleアカウントでログインしてください')
         }
       })
     },
