@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.theme_page">
     <div>
-      <li v-for="theme in themes" :key="theme.content">
+      <li v-for="(theme, index) in themes" :key="`${theme.content}_${index}`">
         <nuxt-link :to="`/posts/${theme.id}`" :class="$style.theme">
           <div :class="$style.content">{{ theme.content }}</div>
           <div :class="$style.commentBox">

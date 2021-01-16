@@ -12,7 +12,7 @@
       </li>
     <!-- お題の回答 -->
     <form :class="$style.answer_submit" @submit="$event.preventDefault(), postComment()">
-      <textarea required model="value"></textarea>
+      <textarea required v-model="value"></textarea>
       <button :class="$style.submit_button" type="submit">回答</button>
     </form>
   </div>
