@@ -2,15 +2,15 @@
   <div :class="$style.theme_page">
     <div>
       <li v-for="theme in themes" :key="theme.content">
-        <nuxt-link :to="`/posts/${theme.id}`" :class="$style.theme">
+        <nuxt-link :to="`/post/${theme.id}`" :class="$style.theme">
           <div :class="$style.content">{{ theme.content }}</div>
           <div :class="$style.commentBox">
-            <img src="@/assets/icon/comment.svg" :class="$style.icon">
+            <img src="@/assets/icon/comment.svg" :class="$style.icon" />
             <div :class="$style.count">{{ theme.comments.length }}</div>
           </div>
         </nuxt-link>
         <div :class="$style.answer">
-          <nuxt-link :to="`/posts/${theme.id}`">
+          <nuxt-link :to="`/post/${theme.id}`">
             お題への回答を見る
           </nuxt-link>
         </div>
@@ -114,7 +114,6 @@ a {
 
 .content {
   margin: 0 auto;
-
 }
 
 .commentBox {
