@@ -1,80 +1,100 @@
 <template>
-    <div>
-        <header :class="$style.header">
-            <nuxt-link to="/" :class="$style.title">worota</nuxt-link>
-            <div :class="$style.buttons">
-              <button :class="$style.hbutton" id="login_button" @click="login()">ログイン</button>
-              <button :class="$style.hbutton" @click="$router.push('/post')">お題投稿</button>
-            </div>
-        </header>
-    </div>
+  <div>
+    <header :class="$style.header">
+      <nuxt-link to="/" :class="$style.title">worota</nuxt-link>
+      <div :class="$style.buttons">
+        <button :class="$style.hbutton" id="login_button" @click="login()">
+          ログイン
+        </button>
+        <button :class="$style.hbutton" @click="$router.push('/post')">
+          お題投稿
+        </button>
+      </div>
+    </header>
+  </div>
 </template>
 
 <script>
-import firebase from "@/plugins/firebase.js"
+import firebase from "@/plugins/firebase.js";
 export default {
   mounted() {
-    const login_button = document.getElementById('login_button')
+    const login_button = document.getElementById("login_button");
     firebase.auth().onAuthStateChanged(user => {
-      if(user){ //ログイン時ログインボタンを非表示
-        login_button.style.display = 'none';
+      if (user) {
+        //ログイン時ログインボタンを非表示
+        login_button.style.display = "none";
       }
-    })
+    });
   },
   methods: {
     login() {
-      firebase.auth().onAuthStateChanged(function(user){
+      firebase.auth().onAuthStateChanged(function(user) {
         console.log(user);
-        if(!user){  //未ログイン時
-          console.log('Not logined')
-          const provider = new firebase.auth.GoogleAuthProvider()
+        if (!user) {
+          //未ログイン時
+          console.log("Not logined");
+          const provider = new firebase.auth.GoogleAuthProvider();
           //Fix: サインイン時googleログイン画面にリダイレクトのほうが良さそう？(リダイレクトだとログインに失敗してた)
-          firebase.auth().signInWithPopup(provider).then(function(result) {
-            var token = result.credential.accessToken
-            var user = result.user
-            console.log('success:'+ user)
-          }).catch(function(error) {
-            var errorCode = error.code
-            var errorMessage = error.message
-            //var email = error.email
-            //var credential = error.credential[
-            console.log('login error:'+ errorMessage)
-          })
+          firebase
+            .auth()
+            .signInWithPopup(provider)
+            .then(function(result) {
+              var token = result.credential.accessToken;
+              var user = result.user;
+              console.log("success:" + user);
+            })
+            .catch(function(error) {
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              //var email = error.email
+              //var credential = error.credential[
+              console.log("login error:" + errorMessage);
+            });
         }
-      })
+      });
     },
+
+    Route_post() {
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          //this.$router.push("/post")
+          console.log(user);
+        } else {
+          alert("googleアカウントでログインしてください");
+        }
+      });
+    }
   }
-}
+};
 </script>
 
 <style module>
 .header {
   width: 100vw;
-  height:6vh;
+  height: 6vh;
   background: white 0% 0% no-repeat padding-box;
   display: table-cell;
-  vertical-align:middle;
+  vertical-align: middle;
 }
-.buttons{
+.buttons {
   display: inline-block;
   float: right;
   margin-right: 5vw;
 }
 .hbutton {
-    width: 80px;
-    height: 30px;
-    border: 1px solid #000;
-    border-radius: 4px;
-    text-align:center;
-    font: normal normal bold 15px/24px Yu Gothic;
-    display: inline-block;
-    background: white 0% 0% no-repeat padding-box;
-    margin-right:10px;
+  width: 80px;
+  height: 30px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  text-align: center;
+  font: normal normal bold 15px/24px Yu Gothic;
+  display: inline-block;
+  background: white 0% 0% no-repeat padding-box;
+  margin-right: 10px;
 }
 .title {
   font: normal normal bold 20px/30px Meiryo;
   display: inline-block;
-  margin-left:10px;
+  margin-left: 10px;
 }
-
 </style>

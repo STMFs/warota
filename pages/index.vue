@@ -2,10 +2,11 @@
   <div class="theme_page">
     <div>
       <li v-for="theme in themes" :key="theme.content">
-        <div class="theme"> {{ theme.content }} </div>
-        <!-- TODO ページ遷移に対応させる -->
-        <div class="answer">
-          <nuxt-link to="/posts/">お題への回答を見る</nuxt-link>
+        {{ theme.content }}
+        <div>
+          <nuxt-link :to="`/posts/` + `${theme.uid}`">
+            お題への回答を見る</nuxt-link
+          >
         </div>
       </li>
     </div>
@@ -18,7 +19,7 @@ import firebase from "@/plugins/firebase.js";
 export default {
   data() {
     const value = "";
-    const count = 0;
+
     return {
       value
     };
@@ -33,16 +34,14 @@ export default {
       .get() // 読み取り （他には .set() .update() などがある）
       .then(collection => {
         // console.log(Array.isArray(collection.docs)); // objectの配列
-        return collection.docs.map( doc => {
+        return collection.docs.map(doc => {
           return doc.data();
         });
       });
-    // console.log("themes", themes);
-
     return {
       themes
     };
-  },
+  }
 };
 </script>
 
@@ -93,7 +92,7 @@ a {
   display: flex;
   height: 12.5vh;
   width: 100%;
-  background:#FFD857 0% 0%;
+  background: #ffd857 0% 0%;
   font: normal normal bold 4.8vw/7.7vw Yu Gothic;
   text-align: center;
   justify-content: center;
@@ -101,7 +100,7 @@ a {
   font-weight: bold;
 }
 
-.theme_page{
+.theme_page {
   margin-top: 3vh;
 }
 

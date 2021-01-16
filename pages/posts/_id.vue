@@ -14,7 +14,6 @@
       <input v-model="value" />
       <button type="submit">回答</button>
     </form>
-    <!-- <div>{{ id }}</div> -->
   </div>
 </template>
 
@@ -24,7 +23,7 @@ import firebase from "@/plugins/firebase.js";
 export default {
   data() {
     const value = "";
-    const count = 0;
+    // const count = 0;
     return {
       value
     };
@@ -60,7 +59,7 @@ export default {
     counter(index) {
       console.log(index);
 
-      const newOata = { ...this.theme };
+      const newOata = { ...this.theme }; // 参照でなくデータだけ代入できる
       newOata.comments[index].good_count += 1;
       firebase
         .firestore()
@@ -74,7 +73,8 @@ export default {
         content: this.value,
         good_count: 0
       };
-      this.comments.push(commentData); // pushの引数を配列に追加
+      console.log("comments", this.theme.comments);
+
       firebase
         .firestore()
         .collection("theme")
@@ -84,8 +84,10 @@ export default {
         })
         .then(() => {
           this.value = ""; // input要素の値を空白に
+          this.comments.push(commentData); // pushの引数を配列に追加
         });
     }
   }
+  // }
 };
 </script>
