@@ -53,7 +53,7 @@ export default {
 };
 </script>
 
-<style>
+<style module>
 .psubmit {
   width: 100vw;
   height: 82vw;
@@ -73,7 +73,6 @@ h1 {
   height: 5.1vh;
   margin: 5.8vw 0 5.8vw 5.3vw;
   padding-top: 5.8vw;
-  /* font: normal normal bold 35px/56px Yu Gothic; */
   font: normal normal bold 4vh/6.3vh Yu Gothic;
 }
 form {
@@ -92,17 +91,13 @@ textarea {
   margin: 30px 0px 30px 0px;
 }
 ::placeholder {
-  /* 15px 24px */
-  /* font: normal normal bold 1.7vh/2.7vh Yu Gothic; */
   font: normal normal bold 4vw/6.4vw Yu Gothic;
   color: #a5a5a5;
   padding-left: 2.6vw;
 }
 .submit {
-  /* font: normal normal bold 1.7vh/2.7vh Yu Gothic; */
   font: normal normal bold 4vw/6.4vw Yu Gothic;
   color: #1492e6;
-  /* font-size:15px; */
   background: white 0% 0% no-repeat padding-box;
   border: 1px solid #000;
   border-radius: 4px;

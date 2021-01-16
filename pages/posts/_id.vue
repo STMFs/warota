@@ -12,7 +12,7 @@
       </li>
     <!-- お題の回答 -->
     <form :class="$style.answer_submit" @submit="$event.preventDefault(), postComment()">
-      <textarea required model="value"></textarea>
+      <textarea required v-model="value"></textarea>
       <button :class="$style.submit_button" type="submit">回答</button>
     </form>
   </div>
@@ -25,7 +25,6 @@ import clickSound from "~/assets/sound/laugh.mp3";
 export default {
   data() {
     const value = "";
-    // const count = 0;
     return {
       value
     };
@@ -33,25 +32,20 @@ export default {
 
   async asyncData(context) {
     console.log(context.route);
-    // asyncDataという名前はあまり気にしないでください。
     const theme = await firebase
-      .firestore() // サービスを選択（他には .auth() など）
+      .firestore()
       .collection("theme")
-      .doc(context.route.params.id) // themeの中のキー（ドキュメント）を持ったデータを
-      .get() // 読み取り （他には .set() .update() などがある）
+      .doc(context.route.params.id)
+      .get()
       .then(doc => {
-        // docという引数には直前までの処理結果が入っている
-        // then は直前までの処理が成功したら実行される
-        return doc.data(); // データ形式を変換してるイメージ
+        return doc.data();
       });
-    console.log("theme", theme);
 
     const contents = theme.content;
     const comments = theme.comments;
 
-    console.log(comments);
     return {
-      contents, // ここでreturnした変数は上の<template>の中で使える
+      contents,
       comments,
       theme
     };
@@ -61,14 +55,14 @@ export default {
     counter(index) {
       console.log(index);
       const audio = new Audio(clickSound);
-      const newOata = { ...this.theme }; // 参照でなくデータだけ代入できる
+      const newDate = { ...this.theme };
       audio.play();
-      newOata.comments[index].good_count += 1;
+      newDate.comments[index].good_count += 1;
       firebase
         .firestore()
         .collection("theme")
         .doc(this.$route.params.id)
-        .set(newOata, { merge: true }); // .$data は省略できる
+        .set(newDate, { merge: true });
     },
 
     postComment() {
@@ -86,12 +80,11 @@ export default {
           comments: firebase.firestore.FieldValue.arrayUnion(commentData)
         })
         .then(() => {
-          this.value = ""; // input要素の値を空白に
-          this.comments.push(commentData); // pushの引数を配列に追加
+          this.value = "";
+          this.comments.push(commentData);
         });
     }
   }
-  // }
 };
 </script>
 
@@ -118,7 +111,7 @@ img{
   width: 100%;
   margin-bottom: 3vh;
   background: #ffd857 0% 0%;
-  font: normal normal bold 4.8vw/7.7vw Yu Gothic;
+  font: normal normal bold 2.0vh/3.3vh Yu Gothic;
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -140,10 +133,8 @@ img{
 }
 
 .submit_button{
-  /* font: normal normal bold 1.7vh/2.7vh Yu Gothic; */
   font: normal normal bold 12px Yu Gothic;
   color: #1492e6;
-  /* font-size:15px; */
   background: white 0% 0% no-repeat padding-box;
   border: 1px solid #000;
   border-radius: 4px;
