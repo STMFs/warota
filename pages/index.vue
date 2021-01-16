@@ -1,13 +1,18 @@
 <template>
-  <div>
+  <div :class="$style.theme_page">
     <div>
-      <li v-for="theme in themes" :key="theme.content">
-        {{ theme.content }}
-        <div>
-          <!-- <nuxt-link to="/posts?theme.uid }"> お題への回答を見る</nuxt-link> -->
-          <nuxt-link :to="`/posts/` + `${theme.uid}`">
-            お題への回答を見る</nuxt-link
-          >
+      <li v-for="(theme, index) in themes" :key="`${theme.content}_${index}`">
+        <nuxt-link :to="`/posts/${theme.id}`" :class="$style.theme">
+          <div :class="$style.content">{{ theme.content }}</div>
+          <div :class="$style.commentBox">
+            <img src="@/assets/icon/comment.svg" :class="$style.icon" />
+            <div :class="$style.count">{{ theme.comments.length }}</div>
+          </div>
+        </nuxt-link>
+        <div :class="$style.answer">
+          <nuxt-link :to="`/posts/${theme.id}`">
+            お題への回答を見る
+          </nuxt-link>
         </div>
       </li>
     </div>
@@ -27,16 +32,16 @@ export default {
   },
 
   async asyncData(context) {
-    // console.log(context.route.params);
-    // asyncDataという名前はあまり気にしないでください。
     const themes = await firebase
-      .firestore() // サービスを選択（他には .auth() など）
+      .firestore()
       .collection("theme")
-      .get() // 読み取り （他には .set() .update() などがある）
+      .get()
       .then(collection => {
-        // console.log(Array.isArray(collection.docs)); // objectの配列
         return collection.docs.map(doc => {
-          return doc.data();
+          return {
+            ...doc.data(),
+            id: doc.id
+          };
         });
       });
     return {
@@ -46,8 +51,16 @@ export default {
 };
 </script>
 
-<style>
-/* TODO CSS 書く */
+<style module>
+li {
+  list-style: none;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
 .container {
   margin: 0 auto;
   min-height: 100vh;
@@ -77,5 +90,50 @@ export default {
 
 .links {
   padding-top: 15px;
+}
+
+.theme {
+  display: flex;
+  position: relative;
+  height: 12.5vh;
+  width: 100%;
+  background: #ffd857 0% 0%;
+  font: normal normal bold 2.2vh/3.3vh Yu Gothic;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.content {
+  margin: 0 auto;
+}
+
+.commentBox {
+  display: flex;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  margin: 0 10px 0 auto;
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+}
+
+.theme_page {
+  margin-top: 3vh;
+}
+
+.answer {
+  display: flex;
+  width: 100%;
+  height: 6vh;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font: normal normal bold 1.7vh/2.7vh Yu Gothic;
 }
 </style>
