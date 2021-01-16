@@ -53,7 +53,7 @@ export default {
 };
 </script>
 
-<style>
+<style module>
 .psubmit {
   width: 100vw;
   height: 82vw;
