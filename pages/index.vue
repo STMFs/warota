@@ -5,7 +5,7 @@
         <nuxt-link :to="`/posts/${theme.id}`" :class="$style.theme">
           <div :class="$style.content">{{ theme.content }}</div>
           <div :class="$style.commentBox">
-            <img src="@/assets/icon/comment.svg" :class="$style.icon">
+            <img src="@/assets/icon/comment.svg" :class="$style.icon" />
             <div :class="$style.count">{{ theme.comments.length }}</div>
           </div>
         </nuxt-link>
@@ -107,7 +107,6 @@ a {
 
 .content {
   margin: 0 auto;
-
 }
 
 .commentBox {
