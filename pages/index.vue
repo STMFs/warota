@@ -2,7 +2,13 @@
   <div :class="$style.theme_page">
     <div>
       <li v-for="theme in themes" :key="theme.content">
-        <div :class="$style.theme">{{ theme.content }}</div>
+        <nuxt-link :to="`/posts/${theme.id}`" :class="$style.theme">
+          <div :class="$style.content">{{ theme.content }}</div>
+          <div :class="$style.commentBox">
+            <img src="@/assets/icon/comment.svg" :class="$style.icon">
+            <div :class="$style.count">{{ theme.comments.length }}</div>
+          </div>
+        </nuxt-link>
         <div :class="$style.answer">
           <nuxt-link :to="`/posts/${theme.id}`">
             お題への回答を見る
@@ -95,6 +101,7 @@ a {
 
 .theme {
   display: flex;
+  position: relative;
   height: 12.5vh;
   width: 100%;
   background: #ffd857 0% 0%;
@@ -103,6 +110,24 @@ a {
   justify-content: center;
   align-items: center;
   font-weight: bold;
+}
+
+.content {
+  margin: 0 auto;
+
+}
+
+.commentBox {
+  display: flex;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  margin: 0 10px 0 auto;
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
 }
 
 .theme_page {
