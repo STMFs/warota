@@ -105,7 +105,7 @@ a {
   height: 12.5vh;
   width: 100%;
   background: #ffd857 0% 0%;
-  font: normal normal bold 4.8vw/7.7vw Yu Gothic;
+  font: normal normal bold 2.2vh/3.3vh Yu Gothic;
   text-align: center;
   justify-content: center;
   align-items: center;
