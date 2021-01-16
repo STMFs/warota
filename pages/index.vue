@@ -1,12 +1,12 @@
 <template>
-  <div class="theme_page">
+  <div :class="$style.theme_page">
     <div>
       <li v-for="theme in themes" :key="theme.content">
-        {{ theme.content }}
-        <div>
-          <nuxt-link :to="`/posts/` + `${theme.uid}`">
-            お題への回答を見る</nuxt-link
-          >
+        <div :class="$style.theme">{{ theme.content }}</div>
+        <div :class="$style.answer">
+          <nuxt-link :to="`/posts/${theme.uid}`">
+            お題への回答を見る
+          </nuxt-link>
         </div>
       </li>
     </div>
@@ -45,7 +45,7 @@ export default {
 };
 </script>
 
-<style>
+<style module>
 /* TODO CSS 書く */
 
 li {
