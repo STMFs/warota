@@ -3,8 +3,7 @@
     <header :class="$style.header">
       <nuxt-link to="/" :class="$style.title">worota</nuxt-link>
       <div :class="$style.buttons">
-        <!-- <button :class="$style.hbutton" id="login_button" @click="login()"> -->
-        <button v-if="user" :class="$style.hbutton" @click="login()">
+        <button :class="$style.hbutton" id="login_button" @click="login()">
           ログイン
         </button>
         <button :class="$style.hbutton" @click="$router.push('/post')">
@@ -27,11 +26,6 @@ export default {
         login_button.style.display = "none";
       }
     });
-  },
-  computed: {
-    user () {
-      firebase.auth().currentUser
-    } 
   },
   methods: {
     login() {
