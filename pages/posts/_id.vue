@@ -111,7 +111,7 @@ img{
   width: 100%;
   margin-bottom: 3vh;
   background: #ffd857 0% 0%;
-  font: normal normal bold 4.8vw/7.7vw Yu Gothic;
+  font: normal normal bold 2.0vh/3.3vh Yu Gothic;
   text-align: center;
   justify-content: center;
   align-items: center;
