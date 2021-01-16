@@ -1,6 +1,6 @@
 <template>
   <div class="psubmit">
-    <h1>お題投稿</h1>
+    <h1 class="h1psubmit">お題投稿</h1>
     <form @submit="$event.preventDefault(), themePost()">
       <textarea
         maxlength="50"
@@ -68,7 +68,7 @@ body {
   margin-left: auto;
   background: #f5f5f5 0% 0% no-repeat padding-box;
 }
-h1 {
+.h1psubmit {
   width: 50vw;
   height: 5.1vh;
   margin: 5.8vw 0 5.8vw 5.3vw;
