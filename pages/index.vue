@@ -4,7 +4,7 @@
       <li v-for="theme in themes" :key="theme.content">
         <div :class="$style.theme">{{ theme.content }}</div>
         <div :class="$style.answer">
-          <nuxt-link :to="`/posts/${theme.uid}`">
+          <nuxt-link :to="`/posts/${theme.id}`">
             お題への回答を見る
           </nuxt-link>
         </div>
@@ -35,9 +35,14 @@ export default {
       .then(collection => {
         // console.log(Array.isArray(collection.docs)); // objectの配列
         return collection.docs.map(doc => {
-          return doc.data();
+          console.log(doc.id);
+          return {
+            ...doc.data(),
+            id: doc.id
+          };
         });
       });
+      // console.log(themes);
     return {
       themes
     };

@@ -38,7 +38,7 @@ export default {
       firebase
         .firestore()
         .collection("theme")
-        .doc(user.uid)
+        .doc()
         .set(themeData)
         .then(() => {
           this.$router.push("/");
