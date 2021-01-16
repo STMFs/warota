@@ -17,6 +17,7 @@
 
 <script>
 import firebase from "@/plugins/firebase.js";
+import { login } from '@/helper/login.js'
 
 export default {
   data() {
@@ -30,19 +31,23 @@ export default {
       const user = firebase.auth().currentUser;
       console.log(this.$data.value);
       console.log("user", user);
-      const themeData = {
-        content: this.value,
-        uid: user.uid,
-        comments: []
-      };
-      firebase
-        .firestore()
-        .collection("theme")
-        .doc()
-        .set(themeData)
-        .then(() => {
-          this.$router.push("/");
-        });
+      if (user) {
+        const themeData = {
+          content: this.value,
+          uid: user.uid,
+          comments: []
+        };
+        firebase
+          .firestore()
+          .collection("theme")
+          .doc()
+          .set(themeData)
+          .then(() => {
+            this.$router.push("/");
+          });
+      } else {
+        login()
+      }
     }
   }
 };
