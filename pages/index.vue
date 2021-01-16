@@ -32,23 +32,18 @@ export default {
   },
 
   async asyncData(context) {
-    // console.log(context.route.params);
-    // asyncDataという名前はあまり気にしないでください。
     const themes = await firebase
-      .firestore() // サービスを選択（他には .auth() など）
+      .firestore()
       .collection("theme")
-      .get() // 読み取り （他には .set() .update() などがある）
+      .get()
       .then(collection => {
-        // console.log(Array.isArray(collection.docs)); // objectの配列
         return collection.docs.map(doc => {
-          console.log(doc.id);
           return {
             ...doc.data(),
             id: doc.id
           };
         });
       });
-    // console.log(themes);
     return {
       themes
     };
@@ -57,8 +52,6 @@ export default {
 </script>
 
 <style module>
-/* TODO CSS 書く */
-
 li {
   list-style: none;
 }
