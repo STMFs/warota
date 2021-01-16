@@ -12,7 +12,7 @@
       </li>
     <!-- お題の回答 -->
     <form :class="$style.answer_submit" @submit="$event.preventDefault(), postComment()">
-      <textarea v-model="value"></textarea>
+      <textarea required model="value"></textarea>
       <button :class="$style.submit_button" type="submit">回答</button>
     </form>
   </div>
@@ -141,7 +141,7 @@ img{
 
 .submit_button{
   /* font: normal normal bold 1.7vh/2.7vh Yu Gothic; */
-  font: normal normal bold 15px Yu Gothic;
+  font: normal normal bold 12px Yu Gothic;
   color: #1492e6;
   /* font-size:15px; */
   background: white 0% 0% no-repeat padding-box;
