@@ -20,6 +20,7 @@
 
 <script>
 import firebase from "@/plugins/firebase.js";
+import clickSound from "~/assets/sound/laugh.mp3";
 
 export default {
   data() {
@@ -59,8 +60,9 @@ export default {
     // いいね数を増やす
     counter(index) {
       console.log(index);
-
+      const audio = new Audio(clickSound);
       const newOata = { ...this.theme }; // 参照でなくデータだけ代入できる
+      audio.play();
       newOata.comments[index].good_count += 1;
       firebase
         .firestore()
