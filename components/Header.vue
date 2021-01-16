@@ -79,10 +79,10 @@ export default {
 .buttons {
   display: inline-block;
   float: right;
-  margin-right: 5vw;
+  margin-right: 3vw;
 }
 .hbutton {
-  width: 80px;
+  width: auto;
   height: 30px;
   border: 1px solid #000;
   border-radius: 4px;
